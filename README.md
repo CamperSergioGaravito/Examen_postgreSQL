@@ -674,7 +674,7 @@ Resuelva todas las consultas utilizando las cláusulas `LEFT JOIN` y `RIGHT J
 
     ~~~
 
-    ![alt text](image-46.png)
+    ![alt text](./imagenes/image-46.png)
 
 2. Devuelve un listado de los comerciales que no han realizado ningún pedido. (Utilizando `IN` o `NOT IN`).
 
@@ -686,7 +686,7 @@ Resuelva todas las consultas utilizando las cláusulas `LEFT JOIN` y `RIGHT J
 
     ~~~
 
-    ![alt text](image-47.png)
+    ![alt text](./imagenes/image-47.png)
 
 
 #
@@ -703,7 +703,7 @@ Resuelva todas las consultas utilizando las cláusulas `LEFT JOIN` y `RIGHT J
 
     ~~~
 
-    ![alt text](image-48.png)
+    ![alt text](./imagenes/image-48.png)
 
 2. Devuelve un listado de los comerciales que no han realizado ningún pedido. (Utilizando `EXISTS` o `NOT EXISTS`).
 
@@ -715,4 +715,4 @@ Resuelva todas las consultas utilizando las cláusulas `LEFT JOIN` y `RIGHT J
 
     ~~~
 
-    ![alt text](aaaaaaaaaaaaaaaaaaaaaaaaaaimage-49.png)
+    ![alt text](./imagenes/image-49.png)
