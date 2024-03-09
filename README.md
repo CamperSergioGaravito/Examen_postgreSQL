@@ -566,42 +566,58 @@ Resuelva todas las consultas utilizando las cláusulas `LEFT JOIN` y `RIGHT J
 
     ~~~ sql
 
-    
+    SELECT * FROM pedido WHERE id_cliente = 2;
 
     ~~~
+
+    ![alt text](./imagenes/image-38.png)
 
 2. Devuelve el número de pedidos en los que ha participado el comercial `Daniel Sáez Vega`. (Sin utilizar `INNER JOIN`)
 
     ~~~ sql
 
-    
+    SELECT * FROM pedido WHERE id_comercial = 1;
 
     ~~~
+
+    ![alt text](./imagenes/image-39.png)
 
 3. Devuelve los datos del cliente que realizó el pedido más caro en el año `2019`. (Sin utilizar `INNER JOIN`)
 
     ~~~ sql
 
-    
+    SELECT * FROM cliente AS c
+    RIGHT JOIN pedido AS p ON (c.id = p.id_cliente)
+    WHERE EXTRACT(YEAR FROM fecha) = 2019 ORDER BY total DESC LIMIT 1;
 
     ~~~
+
+    ![alt text](./imagenes/image-40.png)
 
 4. Devuelve la fecha y la cantidad del pedido de menor valor realizado por el cliente `Pepe Ruiz Santana`.
 
     ~~~ sql
 
-    
+    SELECT fecha, total FROM pedido WHERE id_cliente = 8
+    GROUP BY fecha, total ORDER BY total LIMIT 1;   
 
     ~~~
+
+    ![alt text](./imagenes/image-41.png)
 
 5. Devuelve un listado con los datos de los clientes y los pedidos, de todos los clientes que han realizado un pedido durante el año `2017` con un valor mayor o igual al valor medio de los pedidos realizados durante ese mismo año.
 
     ~~~ sql
 
-    
+    SELECT * FROM cliente AS c
+    JOIN pedido AS p ON (c.id = p.id_cliente)
+    WHERE EXTRACT(YEAR FROM fecha) = 2017 AND p.total >= (
+        SELECT AVG(total) FROM pedido WHERE EXTRACT(YEAR FROM fecha) = 2017
+    );
 
     ~~~
 
+    ![alt text](./imagenes/image-42.png)
 
 #
 
@@ -611,25 +627,37 @@ Resuelva todas las consultas utilizando las cláusulas `LEFT JOIN` y `RIGHT J
 
     ~~~ sql
 
-    
+    SELECT * FROM pedido WHERE total >= ALL (
+        SELECT total FROM pedido
+    );
 
     ~~~
+
+    ![alt text](./imagenes/image-43.png)
 
 2. Devuelve un listado de los clientes que no han realizado ningún pedido. (Utilizando `ANY` o `ALL`).
 
     ~~~ sql
 
-    
+    SELECT * FROM cliente WHERE NOT id = ANY (
+        SELECT id_cliente FROM pedido 
+    );
 
     ~~~
+
+    ![alt text](./imagenes/image-44.png)
 
 3. Devuelve un listado de los comerciales que no han realizado ningún pedido. (Utilizando `ANY` o `ALL`).
 
     ~~~ sql
 
-    
+    SELECT * FROM comercial WHERE NOT id = ANY (
+        SELECT id_comercial FROM pedido 
+    );
 
     ~~~
+
+    ![alt text](./imagenes/image-45.png)
 
 
 #
@@ -640,17 +668,25 @@ Resuelva todas las consultas utilizando las cláusulas `LEFT JOIN` y `RIGHT J
 
     ~~~ sql
 
-    
+     SELECT * FROM cliente WHERE id NOT IN (
+        SELECT id_cliente FROM pedido 
+    );
 
     ~~~
+
+    ![alt text](image-46.png)
 
 2. Devuelve un listado de los comerciales que no han realizado ningún pedido. (Utilizando `IN` o `NOT IN`).
 
     ~~~ sql
 
-    
+     SELECT * FROM comercial WHERE id NOT IN (
+        SELECT id_comercial FROM pedido 
+    );
 
     ~~~
+
+    ![alt text](image-47.png)
 
 
 #
@@ -661,14 +697,22 @@ Resuelva todas las consultas utilizando las cláusulas `LEFT JOIN` y `RIGHT J
 
     ~~~ sql
 
-    
+    SELECT * FROM cliente AS c WHERE NOT EXISTS (
+        SELECT 1 FROM pedido WHERE id_cliente = c.id
+    );
 
     ~~~
+
+    ![alt text](image-48.png)
 
 2. Devuelve un listado de los comerciales que no han realizado ningún pedido. (Utilizando `EXISTS` o `NOT EXISTS`).
 
     ~~~ sql
 
-    
+     SELECT * FROM comercial AS c WHERE NOT EXISTS (
+        SELECT 1 FROM pedido WHERE id_comercial = c.id
+    );
 
     ~~~
+
+    ![alt text](aaaaaaaaaaaaaaaaaaaaaaaaaaimage-49.png)
